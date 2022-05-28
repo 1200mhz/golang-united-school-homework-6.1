@@ -166,16 +166,16 @@ func TestRemoveAllCircles(t *testing.T) {
 		t.Errorf("error, man 1")
 	}
 
-	circle := Circle{1}
+	circle := &Circle{1}
 	_ = box.AddShape(circle)
 
-	circle = Circle{2}
+	circle = &Circle{2}
 	_ = box.AddShape(circle)
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	_ = box.AddShape(rectangle)
 
-	circle = Circle{3}
+	circle = &Circle{3}
 	_ = box.AddShape(circle)
 
 	err = box.RemoveAllCircles()
