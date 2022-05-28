@@ -102,13 +102,12 @@ func TestReplaceByIndex(t *testing.T) {
 	circle := Circle{5}
 	_ = box.AddShape(circle)
 
-	rectangle := Rectangle{2, 3}
-	_ = box.AddShape(rectangle)
-
 	triangle := Triangle{4}
-	shape, err := box.ReplaceByIndex(0, triangle)
+	_ = box.AddShape(triangle)
 
-	shape, err = box.GetByIndex(0)
+	rectangle := Rectangle{2, 3}
+	shape, err := box.ReplaceByIndex(1, rectangle)
+
 	if !reflect.DeepEqual(shape, triangle) || !reflect.DeepEqual(err, nil) {
 		t.Errorf("error, man 1")
 	}
@@ -180,8 +179,13 @@ func TestRemoveAllCircles(t *testing.T) {
 	_ = box.AddShape(circle)
 
 	err = box.RemoveAllCircles()
+
+	if !reflect.DeepEqual(len(box.shapes), 1) {
+		t.Errorf("error, man 2.1")
+	}
+
 	if !reflect.DeepEqual(err, nil) {
-		t.Errorf("error, man 2")
+		t.Errorf("error, man 2.2")
 	}
 
 	shape, err := box.GetByIndex(0)

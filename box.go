@@ -66,9 +66,11 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 		return nil, err
 	}
 
+	cp := make([]Shape, len(b.shapes))
+	copy(cp, b.shapes)
 	b.shapes[i] = shape
 
-	return shape, nil
+	return cp[i], nil
 }
 
 // SumPerimeter provides sum perimeter of all shapes in the list.
