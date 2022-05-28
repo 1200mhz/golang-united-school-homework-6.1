@@ -13,19 +13,19 @@ const notFoundError = "not found"
 func TestAddShape(t *testing.T) {
 	box := NewBox(2)
 
-	shape := Circle{5}
+	shape := &Circle{5}
 	err := box.AddShape(shape)
 	if !reflect.DeepEqual(err, nil) {
 		t.Errorf("error, man 1")
 	}
 
-	shape = Circle{10}
+	shape = &Circle{10}
 	err = box.AddShape(shape)
 	if !reflect.DeepEqual(err, nil) {
 		t.Errorf("error, man 2")
 	}
 
-	shape = Circle{15}
+	shape = &Circle{15}
 	err = box.AddShape(shape)
 	if err == nil || !strings.Contains(err.Error(), tooMuchError) {
 		t.Errorf("error, man 3")
@@ -35,13 +35,13 @@ func TestAddShape(t *testing.T) {
 func TestGetByIndex(t *testing.T) {
 	box := NewBox(2)
 
-	circle := Circle{5}
+	circle := &Circle{5}
 	err := box.AddShape(circle)
 	if !reflect.DeepEqual(err, nil) {
 		t.Errorf("error, man 1")
 	}
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	err = box.AddShape(rectangle)
 	if !reflect.DeepEqual(err, nil) {
 		t.Errorf("error, man 2")
@@ -66,13 +66,13 @@ func TestGetByIndex(t *testing.T) {
 func TestExtractByIndex(t *testing.T) {
 	box := NewBox(3)
 
-	circle := Circle{5}
+	circle := &Circle{5}
 	_ = box.AddShape(circle)
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	_ = box.AddShape(rectangle)
 
-	triangle := Triangle{4}
+	triangle := &Triangle{4}
 	_ = box.AddShape(triangle)
 
 	shape, err := box.ExtractByIndex(1)
@@ -99,13 +99,13 @@ func TestExtractByIndex(t *testing.T) {
 func TestReplaceByIndex(t *testing.T) {
 	box := NewBox(2)
 
-	circle := Circle{5}
+	circle := &Circle{5}
 	_ = box.AddShape(circle)
 
-	triangle := Triangle{4}
+	triangle := &Triangle{4}
 	_ = box.AddShape(triangle)
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	shape, err := box.ReplaceByIndex(1, rectangle)
 
 	if !reflect.DeepEqual(shape, triangle) || !reflect.DeepEqual(err, nil) {
@@ -121,13 +121,13 @@ func TestReplaceByIndex(t *testing.T) {
 func TestSumPerimeter(t *testing.T) {
 	box := NewBox(3)
 
-	circle := Circle{1}
+	circle := &Circle{1}
 	_ = box.AddShape(circle)
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	_ = box.AddShape(rectangle)
 
-	triangle := Triangle{3}
+	triangle := &Triangle{3}
 	_ = box.AddShape(triangle)
 
 	expected := 2*math.Pi + 10 + 9
@@ -141,13 +141,13 @@ func TestSumPerimeter(t *testing.T) {
 func TestSumArea(t *testing.T) {
 	box := NewBox(3)
 
-	circle := Circle{1}
+	circle := &Circle{1}
 	_ = box.AddShape(circle)
 
-	rectangle := Rectangle{2, 3}
+	rectangle := &Rectangle{2, 3}
 	_ = box.AddShape(rectangle)
 
-	triangle := Triangle{2}
+	triangle := &Triangle{2}
 	_ = box.AddShape(triangle)
 
 	expected := math.Pi + 6 + math.Sqrt(3)
